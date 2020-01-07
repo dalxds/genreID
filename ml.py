@@ -3,7 +3,6 @@ import os
 import numpy as np
 import sklearn as skl
 import ast
-import os
 
 import IPython.display as ipd
 import numpy as np
@@ -73,7 +72,6 @@ if __name__ == '__main__':
     plt.scatter(X[:, 0], X[:, 1], c=y, cmap='RdBu', alpha=0.5)
     # X.shape, y.shape
     plt.show()
-
 
     # Support vector classification with rbf kernel.
     clf = skl.svm.SVC(C=1.5, kernel='rbf')
