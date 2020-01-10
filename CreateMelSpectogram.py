@@ -82,11 +82,12 @@ if __name__ == '__main__':
             continue
         os.chdir(folder_path)
         for file in os.listdir(folder_path):
-            debug_count += 1
+            if __debug__:
+                debug_count += 1
             audio_path = os.path.abspath(file)
             mel_path = get_output_path(audio_path)
             mel_spec_exists = os.path.exists(mel_path)
             if not mel_spec_exists:
                 generate_mel_spec(audio_path, mel_path)
             if __debug__:
-                print("Count: {0}/8000 --- E Status: {1} --- Filename: {2}".format(debug_count, exists, mel_path))
+                print("Count: {0}/8000 --- E Status: {1} --- Filename: {2}".format(debug_count, mel_spec_exists, mel_path))
