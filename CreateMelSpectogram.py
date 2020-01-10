@@ -49,6 +49,9 @@ def generate_mel_spec(input_path, output_path):
 
 
 if __name__ == '__main__':
+    if __debug__:
+        debug_count = 0
+
     # read tracks' data
     tracks = utils.load('')  # [ADD] Path to metadata file
     # select FMA Small
@@ -73,21 +76,17 @@ if __name__ == '__main__':
 
     os.chdir(PATH_TO_FMA)
 
-    if __debug__:
-        debug_count = 0
-
     for folder in os.listdir(PATH_TO_FMA):
         folder_path = PATH_TO_FMA + "/" + folder
         if not os.path.isdir(folder_path):
             continue
         os.chdir(folder_path)
         for file in os.listdir(folder_path):
-            if __debug__:
-                debug_count += 1
             audio_path = os.path.abspath(file)
             mel_path = get_output_path(audio_path)
             mel_spec_exists = os.path.exists(mel_path)
             if not mel_spec_exists:
                 generate_mel_spec(audio_path, mel_path)
             if __debug__:
+                debug_count += 1
                 print("Count: {0}/8000 --- E Status: {1} --- Filename: {2}".format(debug_count, mel_spec_exists, mel_path))
